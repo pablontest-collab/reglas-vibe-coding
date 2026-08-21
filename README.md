@@ -2,7 +2,7 @@
 
 > **Reglas en español para trabajar con asistentes de IA en proyectos de código — para vibe coders y no programadores.**
 
-¿No sabés programar pero construís con IA? Estas reglas le enseñan a tu asistente a trabajar con orden: **primero entender, después actuar, siempre con lo mínimo que funciona.**
+¿No sabés programar pero construyes con IA? Estas reglas le enseñan a tu asistente a trabajar con orden: **primero entender, después actuar, siempre con lo mínimo que funciona.**
 
 ---
 
