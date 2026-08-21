@@ -104,3 +104,4 @@ Basándote en [ruta]/00-base.md y [ruta]/50-review.md, revisá el diff de lo que
 ## Licencia
 
 MIT — ver [LICENSE](LICENSE). Hecho con la filosofía **ponytail** (MIT, github.com/DietrichGebert/ponytail): el mejor código es el que nunca se escribió · adaptado al trabajo con asistentes de IA: sin redundancia, stack como plano de construcción, cobertura garantizada, fases con aprobación — EARS, listo = comando exitoso, error completo, stack con fecha, QA en sesión limpia.
+⭐ ¿Te sirvió? Dale una estrella al repo — ayuda a que otros vibe coders lo encuentren.
