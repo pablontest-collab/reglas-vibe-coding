@@ -1,3 +1,4 @@
+<img width="2880" height="1440" alt="banner-repo-1cod" src="https://github.com/user-attachments/assets/e1da91e5-c63c-40b8-8ab9-327f8bf30d12" />
 # reglas-vibe-coding — Reglas en español para trabajar con asistentes de IA
 
 > **Reglas en español para trabajar con asistentes de IA en proyectos de código — para vibe coders y no programadores.**
