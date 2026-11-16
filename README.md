@@ -59,3 +59,5 @@ Para revisión independiente, abre otra conversación o un contexto realmente se
 ## Licencia y colaboración
 
 Publicado bajo licencia MIT — ver [LICENSE](LICENSE). Si quieres proponer mejoras o traducciones, revisa [CONTRIBUTING.md](CONTRIBUTING.md). Inspirado en los principios YAGNI de [ponytail](https://github.com/DietrichGebert/ponytail) (MIT).
+
+⭐ ¿Te sirvió? Dale una estrella al repo — ayuda a que otros vibe coders lo encuentren.
