@@ -1,3 +1,4 @@
+<img width="1774" height="887" alt="regals-v2" src="https://github.com/user-attachments/assets/8799ee9e-1cda-4533-a6f2-77de057f9f5a" />
 # Reglas genéricas para asistentes de IA
 
 Biblioteca para planificar, construir, diagnosticar, corregir y revisar software. No depende de un proveedor, aplicación, sistema operativo, infraestructura ni nombres personales. Su cumplimiento depende de las capacidades y el comportamiento del modelo; no garantiza resultados idénticos entre distintas IA.
