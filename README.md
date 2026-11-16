@@ -1,4 +1,4 @@
-<img width="1774" height="887" alt="regals-v2" src="https://github.com/user-attachments/assets/8799ee9e-1cda-4533-a6f2-77de057f9f5a" />
+<img width="1774" height="887" alt="reglas-vibe-coding V2" src="https://github.com/user-attachments/assets/8799ee9e-1cda-4533-a6f2-77de057f9f5a" />
 # Reglas genéricas para asistentes de IA
 
 Biblioteca para planificar, construir, diagnosticar, corregir y revisar software. No depende de un proveedor, aplicación, sistema operativo, infraestructura ni nombres personales. Su cumplimiento depende de las capacidades y el comportamiento del modelo; no garantiza resultados idénticos entre distintas IA.
@@ -12,6 +12,7 @@ Envía **00-base.md + la etapa actual + petición concreta + contexto pertinente
 - **Chat sin acceso a tus archivos:** adjunta los documentos o pega su contenido. Una ruta escrita no permite leer tu disco.
 - **Asistente con herramientas:** facilita el proyecto y las ubicaciones reales a las que tiene acceso; especifica qué puede modificar o ejecutar. No presupongas que dispone de todas las herramientas.
 - **Sin capacidad de ejecución:** puede preparar código o propuestas, pero debe indicar qué queda pendiente de aplicar y probar. No aceptes una prueba imaginada como verificación.
+- **Adaptarlo como `SKILL.md` u otro formato:** si usas un asistente con herramientas (Cursor, Claude Code, GitHub Copilot, Codex, Gemini CLI, OpenCode, Antigravity, Hermes, etc.), puedes pedirle al propio asistente que empaquete o adapte estas reglas al formato que use tu entorno (`SKILL.md`, `AGENTS.md`, `CLAUDE.md`, etc.).
 
 ## Elegir etapa
 
