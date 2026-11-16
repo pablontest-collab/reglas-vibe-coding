@@ -1,61 +1,27 @@
-# 50-review.md — Revisar el diff final (paso 4 del pipeline)
+# 50-review — Revisar de forma independiente
 
-> **Cómo usar este archivo:** *"Basándote en `00-base.md` y `50-review.md`, revisá el diff de lo que acabamos de hacer."*
->
-> Es la revisión de los **CAMBIOS RECIENTES (el diff)**, no del proyecto entero. Va al final del loop de prueba y ajuste, o justo antes de entregar el código a otro modelo.
->
-> Seguí la base (`00-base.md`): protocolo, escalera YAGNI, líneas rojas, cobertura garantizada y fases con aprobación viven ahí. Acá está solo lo único de este paso: cómo se revisa el diff.
+Requiere [00-base.md](00-base.md), requisitos originales y comparación real del código anterior con el actual —el diff—. No modifiques el código revisado.
 
----
+## Preparación
 
-## Rol
+- Revisa en un contexto separado del constructor, con acceso al código pertinente, no solo a su informe. El constructor puede probar; eso no sustituye esta revisión. Si no existe un contexto separado, declara la limitación y prepara el pase, sin fingir independencia.
+- Obtén el diff real con las herramientas disponibles; si falta la comparación, solicita los archivos anterior y actual o un diff completo. Una lista de archivos modificados no la reemplaza. Identifica el estado del código revisado.
+- Céntrate en los cambios y sus efectos: lee funciones completas, consumidores, configuración y pruebas relacionados cuando hagan falta. No audites todo por defecto; organiza bloques según la base si el alcance lo requiere.
 
-Eres una desarrolladora senior haciendo una revisión **ENFOCADA de los cambios recientes (el diff)**, no del proyecto entero.
+## Comprobación
 
-## Qué se revisa (y qué no)
+1. Contrasta **cada criterio** con **CUMPLE / NO CUMPLE / NO PUDE VERIFICAR**, aportando evidencia. Si faltan requisitos para decidir, pide aclaración; no los inventes. Distingue comprobaciones propias de resultados ajenos: el informe del constructor es una pista, no prueba suficiente. Si un criterio requiere ejecutar algo y no puedes hacerlo, deja esa verificación pendiente.
+2. Busca defectos funcionales, fallos introducidos, riesgos de seguridad/datos y accesibilidad. Aplica simplicidad y vigencia de la base. No inventes hallazgos para llenar una lista ni propongas sustituciones por tamaño: demuestra equivalencia de comportamiento, casos límite y usos antes de recomendar recortes.
+3. Prioriza por impacto: **bloqueante / importante / opcional**. Cada observación: **archivo:líneas + categoría → problema → por qué importa → acción concreta → evidencia y límites**. Para simplificación puedes usar `eliminar`, `biblioteca estándar`, `plataforma`, `innecesario` o `simplificar`; no son las únicas categorías.
 
-- Lee **SOLO los cambios recientes** (el diff / los archivos que se acaban de modificar). No hagas una auditoría completa.
-- Si no hay un diff claro, pedí al usuario qué archivos cambiaron o pedí el diff.
-- Si el diff es grande (más de ~8-10 archivos), usá el modo por **fases con aprobación** de `00-base.md`.
-- **Sesión limpia (regla del QA):** el que escribió el código NO lo revisa en la misma conversación. La revisión se hace con contexto fresco, recibiendo SOLO el diff + los requisitos originales (los criterios EARS del brief si existen). El autor no encuentra sus propios errores.
-- **Verificación por contrato:** si el proyecto tiene criterios EARS, se verifica CADA FRASE uno por uno, marcando CUMPLE / NO CUMPLE / NO PUDE VERIFICAR, con evidencia y el texto completo del error o comportamiento observado.
+## Ejemplos hipotéticos de formato
 
-## Verificación de vigencia
+No describen hallazgos del proyecto actual:
 
-- Si los cambios tocan librerías, APIs o versiones, verificá (web) que lo usado sigue vigente hoy.
-- No llames "obsoleto" a algo que en realidad está bien. No elogies patrones deprecados como si fueran buena práctica.
+- **Útil:** `guardado.py:42: funcional → una prueba de escritura fallida recibe éxito → el usuario cree que guardó → propagar el error y comprobar ese caso`.
+- **Útil:** `fechas.js:8: plataforma → dependencia usada para un formato → comparación confirma misma salida y zona en los casos exigidos, sin otros usos → sustituir por la función nativa comprobada`.
+- **Insuficiente:** «Esta clase quizá sobra»: faltan ubicación, efecto, evidencia y acción. Una sola implementación, idempotencia o menos líneas no demuestran que algo sea innecesario.
 
-## La escalera aplicada al diff
+## Veredicto
 
-Aplicá la escalera YAGNI de `00-base.md` a cada agregado/cambio: ¿era necesario? ¿duplica algo que ya existía? ¿la librería estándar ya lo hacía? ¿el navegador ya lo trae? ¿se podía en una línea? ¿es el mínimo que funciona o hay relleno?
-
-## Líneas rojas
-
-Las líneas rojas de `00-base.md` son inegociables: **NUNCA** marques como "basura" para eliminar validación de entradas, manejo de errores, seguridad o accesibilidad. Si un cambio agregó código de seguridad necesario, eso es correcto, no basura.
-
-## Formato de observación (few-shot — así se ve una buena)
-
-Cada ítem: `[archivo:líneas]: [etiqueta]: qué está mal → por qué → qué hacer (borrar o ajustar).`
-
-**Etiquetas:** `delete` (sobra) · `stdlib` (la librería estándar ya lo hace) · `native` (la plataforma ya lo trae) · `yagni` (abstracción con un solo uso) · `shrink` (menos líneas, mismo resultado).
-
-**Ejemplos:**
-
-- ✅ `app.py:12-38: stdlib: clase de validación de 27 líneas. El "@" se valida en 1 línea; la validación real es el correo de confirmación. → Reemplazar por 1 línea.`
-- ✅ `main.js:4: native: importaste moment.js para un solo formato de fecha. El navegador ya trae Intl.DateTimeFormat, 0 dependencias. → Borrar la dependencia.`
-- ✅ `repo.py:88: yagni: AbstractRepository con una sola implementación. → Integrarlo hasta que exista una segunda.`
-- ✅ `utils.py:30-44: shrink: loop manual arma un dict. dict(zip(claves, valores)) en 1 línea. → Reducir.`
-- ✅ `app.py:52-71: delete: wrapper de retry alrededor de una llamada local idempotente. Nada lo reemplaza. → Borrar.`
-- ❌ *"Esta clase EmailValidator podría ser más compleja de lo necesario…"* → **MALO:** demasiado vaga. Sin líneas, sin reemplazo, sin acción.
-
-## Entrega (lista accionable)
-
-En español plano, para alguien que **NO sabe programar**:
-
-- **Veredicto corto:** ¿el diff está bien o tiene problemas?
-- **Lista de corrección/borrado:** cada ítem con el formato de arriba, separando **URGENTE** (rompe algo o toca seguridad) de **COSMÉTICO**.
-- **Cierre medible:** `net: - X líneas posibles de recorte.` — o si está limpio: *"Ya está flaco. A enviar."* ✅
-
----
-
-*Esencia: filosofía **ponytail** (MIT) — el mejor código es el que nunca se escribió · adaptado al trabajo con asistentes de IA en 2026: few-shot examples y cierre medible.*
+Resume criterios cumplidos, fallos y pendientes con evidencia; añade observaciones priorizadas. Si no hay hallazgos, dilo. No declares listo si falta comprobar algo pertinente. Las líneas recortadas son un dato secundario medido, nunca el criterio de aprobación. Entrega para decidir correcciones o cierre; no las apliques en esta etapa.

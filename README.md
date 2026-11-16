@@ -1,108 +1,60 @@
-<img width="2880" height="1440" alt="banner-repo-1cod" src="https://github.com/user-attachments/assets/e1da91e5-c63c-40b8-8ab9-327f8bf30d12" />
-# reglas-vibe-coding — Reglas en español para trabajar con asistentes de IA
+# Reglas genéricas para asistentes de IA
 
-> **Reglas en español para trabajar con asistentes de IA en proyectos de código — para vibe coders y no programadores.**
+Biblioteca para planificar, construir, diagnosticar, corregir y revisar software. No depende de un proveedor, aplicación, sistema operativo, infraestructura ni nombres personales. Su cumplimiento depende de las capacidades y el comportamiento del modelo; no garantiza resultados idénticos entre distintas IA.
 
-¿No sabés programar pero construyes con IA? Estas reglas le enseñan a tu asistente a trabajar con orden: **primero entender, después actuar, siempre con lo mínimo que funciona.**
+Esta guía sirve para elegir las reglas. **No la adjuntes entera en cada tarea.**
 
----
+## Qué enviar
 
-## 🚀 Cómo usarlo en 10 segundos
+Envía **00-base.md + la etapa actual + petición concreta + contexto pertinente del proyecto**. No envíes todas las etapas. Si el contenido ya está disponible y vigente en la conversación, no lo dupliques; recárgalo si falta o cambió.
 
-1. **Copiá esta carpeta** a tu proyecto (o guardá los `.md` donde quieras).
-2. **Invocá por referencia de path** en tu prompt de IA:
+- **Chat sin acceso a tus archivos:** adjunta los documentos o pega su contenido. Una ruta escrita no permite leer tu disco.
+- **Asistente con herramientas:** facilita el proyecto y las ubicaciones reales a las que tiene acceso; especifica qué puede modificar o ejecutar. No presupongas que dispone de todas las herramientas.
+- **Sin capacidad de ejecución:** puede preparar código o propuestas, pero debe indicar qué queda pendiente de aplicar y probar. No aceptes una prueba imaginada como verificación.
 
-```
-Basándote en [ruta]/00-base.md y [ruta]/10-brief.md, ayúdame a armar el brief para: [tu idea]
-```
+## Elegir etapa
 
-3. **Seguí el pipeline** (abajo) y tu IA trabajará por fases, pidiéndote aprobación en cada paso. Nada es automático: **vos decidís** cuándo usar cada regla.
+| Archivo | Para qué sirve |
+|---|---|
+| [00-base.md](00-base.md) | Criterio, capacidades, permisos, protección, lectura, simplicidad y evidencia comunes. |
+| [10-brief.md](10-brief.md) | Aclarar la idea y entregar un plan para aprobar, sin código. |
+| [20-begin.md](20-begin.md) | Implementar el cambio autorizado y probarlo, o proponerlo si no hay acceso. |
+| [30-diagnostico.md](30-diagnostico.md) | Inventario, mapa, auditoría e informe; no corrige. |
+| [40-fix.md](40-fix.md) | Corregir únicamente hallazgos seleccionados y aprobados. |
+| [50-review.md](50-review.md) | Revisar cambios en contexto separado, sin modificarlos. |
 
-> 💡 **Tip AGENTS.md:** si tu orquestador lee `AGENTS.md` (el estándar de contexto de 2026: opencode, Cursor, Claude Code, etc.), podés copiar el contenido de `00-base.md` como base del sistema y referenciar las demás por path. Es la capa general de tus reglas; cada proyecto agrega su propia capa local.
+**Proyecto nuevo:** plan → aprobación → implementación → pruebas/ajustes autorizados → revisión independiente.
 
----
+**Proyecto existente:** diagnóstico → selección y aprobación → correcciones → revisión independiente.
 
-## El pipeline (orden sugerido)
+Cada pase es deliberado; no autoriza el recorrido completo. Una orden directa clara puede autorizar un cambio pequeño sin otro plan formal.
 
-```
-NUEVO código:      00-base + 10-brief → 20-begin → (probás y ajustás) → 50-review
-Código EXISTENTE:  00-base + 30-diagnostico (fases) → 40-fix → 50-review
-```
+## Peticiones listas para adaptar
 
-La base (`00-base.md`) se invoca **SIEMPRE** junto a la regla específica. Nada es automático: el usuario decide cuándo usar cada una.
+Adjunta los archivos nombrados o facilita un acceso real a ellos. Sustituye los campos entre corchetes:
 
-## Qué hace cada archivo
+| Necesidad | Petición |
+|---|---|
+| Definir una idea | «Aplica 00-base.md y 10-brief.md. Ayúdame a definir [idea y contexto]; pregunta solo lo que falte. No construyas todavía». |
+| Crear o modificar | «Aplica 00-base.md y 20-begin.md. Implementa solo [cambio aprobado] en [proyecto/entorno], con [criterios de aceptación]». |
+| Diagnosticar | «Aplica 00-base.md y 30-diagnostico.md. Audita [material o proyecto] dentro de [alcance], sin corregirlo». |
+| Corregir | «Aplica 00-base.md y 40-fix.md. Corrige solo [IDs aprobados] del diagnóstico adjunto, dentro de [alcance]». |
+| Revisar | «Aplica 00-base.md y 50-review.md. Revisa [comparación anterior/actual] contra [requisitos], con el código relacionado adjunto, sin modificarlo». |
 
-- **`00-base.md`** → La **BASE común**: protocolo (criollo, no asumir, cuestionar, recomendar-recortar), stack como plano de construcción, escalera YAGNI, líneas rojas, cobertura garantizada, fases con aprobación. Invocala SIEMPRE como base.
-- **`10-brief.md`** → **Paso 1:** idea vaga → brief aprobado. **No se escribe código hasta que el brief esté aprobado.**
-- **`20-begin.md`** → **Paso 2:** escribir/modificar código con la escalera. En ejecución obedece el brief; líneas rojas mandan.
-- **`30-diagnostico.md`** → **Paso 3a:** entender + auditar código existente, en **fases con aprobación del usuario** (inventario → mapa → auditoría → informe).
-- **`40-fix.md`** → **Paso 3b:** aplicar **SOLO** lo señalado por el diagnóstico, de a uno, mínimo.
-- **`50-review.md`** → **Paso 4:** revisar el diff final, con ejemplos few-shot y cierre medible.
+## Continuar sin empezar de cero
 
-## Cómo usar (invocación por referencia)
+Al cambiar de etapa o conversación, facilita solo lo necesario o referencia un entregable accesible que ya lo contenga:
 
-Las reglas se invocan por **referencia de path** en el prompt, para que cualquier asistente de IA las cargue:
+- Objetivo y alcance autorizados.
+- Estado o versión del código, y archivos afectados.
+- Pruebas ejecutadas, entorno, resultados y dónde está la evidencia.
+- Pendientes, límites y bloqueos.
+- Siguiente acción autorizada.
 
-```
-Basándote en [ruta]/00-base.md y [ruta]/10-brief.md, [tu pedido]
-```
+No presupongas memoria entre conversaciones. Esta ficha no sustituye evidencia; los cambios pertinentes pueden invalidar pruebas anteriores.
 
-Si el orquestador tiene un sistema de skills/instrucciones persistentes (AGENTS.md, CLAUDE.md, etc.), se puede copiar el contenido de `00-base.md` como base del sistema y referenciar las demás por path.
+Para revisión independiente, abre otra conversación o un contexto realmente separado y proporciona base, revisión, requisitos, comparación y código relacionado. Pedir «construye y luego revísate» en el mismo contexto no crea independencia. Si no puedes separar contextos, declara esa limitación; no añadas agentes ni servicios por defecto.
 
-## Plantillas de prompts (copiar-pegar)
+## Licencia y colaboración
 
-Cambiá lo que está entre `[corchetes]` y la `[ruta]` donde estén las reglas.
-
-**0. Base — SIEMPRE junto a la regla específica**
-```
-Basándote en [ruta]/00-base.md y [regla], [tu pedido]
-```
-
-**1a. Sacar idea vaga**
-```
-Basándote en [ruta]/00-base.md, ayúdame a sacar la idea para: [tema vago]
-```
-
-**1b. Brief (idea ya clara → plan)**
-```
-Basándote en [ruta]/00-base.md y [ruta]/10-brief.md, armá el brief PARA ESTA idea ya definida: [resumen 2 líneas]
-```
-
-**2. Código (escribir / modificar)**
-```
-Basándote en [ruta]/00-base.md y [ruta]/20-begin.md, crea el código para: [lo que necesitas]
-Basándote en [ruta]/00-base.md y [ruta]/20-begin.md, modifica [archivo] para que haga: [X]
-```
-
-**3. Entender + auditar código existente (en fases)**
-```
-Basándote en [ruta]/00-base.md y [ruta]/30-diagnostico.md, entendé y auditá la carpeta [ruta del proyecto]
-```
-
-**4. Aplicar correcciones (después del diagnóstico)**
-```
-Basándote en [ruta]/00-base.md y [ruta]/40-fix.md, aplicá las recomendaciones del diagnóstico en: [archivo/carpeta]
-```
-
-**5. Revisar lo hecho (después de ajustar / antes de otro modelo)**
-```
-Basándote en [ruta]/00-base.md y [ruta]/50-review.md, revisá el diff de lo que acabamos de hacer.
-```
-
-## Notas
-
-- La base (`00-base.md`) dice lo transversal **UNA sola vez**: protocolo, escalera, criterios y verificación, líneas rojas, cobertura garantizada, fases con aprobación. Las reglas específicas la **referencian, no la repiten**. Si una regla parece repetir algo de la base, es un error.
-- **Web con criterio:** verificar vigencia solo cuando se tocan tecnologías, librerías, APIs o versiones — y el entregable lleva versiones exactas + fecha de verificación.
-- **Cobertura garantizada:** nunca saltar un archivo en silencio; HTML/CSS/config son parte del sistema, no decoración.
-- **Análisis grandes:** por fases con aprobación (contexto fresco); proyectos chicos: entrega directa.
-- **Sesión limpia:** la revisión (`50-review.md`) se hace con contexto fresco — el que escribió el código no lo revisa en la misma conversación.
-- **"Listo":** toda tarea termina con un comando de verificación exitoso, no por palabra propia. Si falla, el error completo se devuelve para corregir bien.
-- Si querés combinar varias reglas en un mismo prompt, encadenalas.
-
----
-
-## Licencia
-
-MIT — ver [LICENSE](LICENSE). Hecho con la filosofía **ponytail** (MIT, github.com/DietrichGebert/ponytail): el mejor código es el que nunca se escribió · adaptado al trabajo con asistentes de IA: sin redundancia, stack como plano de construcción, cobertura garantizada, fases con aprobación — EARS, listo = comando exitoso, error completo, stack con fecha, QA en sesión limpia.
-⭐ ¿Te sirvió? Dale una estrella al repo — ayuda a que otros vibe coders lo encuentren.
+Publicado bajo licencia MIT — ver [LICENSE](LICENSE). Si quieres proponer mejoras o traducciones, revisa [CONTRIBUTING.md](CONTRIBUTING.md). Inspirado en los principios YAGNI de [ponytail](https://github.com/DietrichGebert/ponytail) (MIT).
